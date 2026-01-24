@@ -3,441 +3,371 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Automated Trading Bot Funnel</title>
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
+  <title>MetaTrader 4/5 Bot | Autopilot Profits</title>
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,600,700,900&display=swap" rel="stylesheet">
   <style>
-    body {
+    :root {
+      --bg: #0A0F14;
+      --card: #131922;
+      --neon-green: #00FF9F;
+      --neon-green2: #39FF14;
+      --electric-blue: #00BFFF;
+      --electric-blue2: #1E90FF;
+      --text-main: #F5F7FA;
+      --text-secondary: #B0B8C1;
+      --danger: #FF3B3B;
+      --scarcity: #FF7F50;
+      --white: #fff;
+      --gray: #B0B8C1;
+    }
+    html, body {
       margin: 0;
-      font-family: 'Montserrat', Arial, sans-serif;
-      background: #10141a;
-      color: #e5e7eb;
+      padding: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
+      box-sizing: border-box;
     }
     .container {
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 24px;
+      padding: 0 20px;
     }
+    /* HERO SECTION */
     .hero {
-      background: linear-gradient(90deg, #10141a 70%, #1a1f2b 100%);
-      color: #fff;
-      padding: 56px 24px 40px 24px;
-      border-radius: 20px;
-      text-align: left;
-      margin-bottom: 40px;
+      width: 100vw;
+      min-height: 600px;
+      background: var(--bg);
       display: flex;
       align-items: center;
-      gap: 40px;
+      justify-content: center;
+      padding: 64px 0 48px 0;
       position: relative;
-      min-height: 340px;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: url('robot-logo.png') no-repeat right 8% center/420px, linear-gradient(90deg, #0A0F14 60%, #131922 100%);
+      opacity: 0.13;
+      z-index: 0;
     }
     .hero-content {
-      flex: 1 1 60%;
-      z-index: 2;
-    }
-    .hero h1 {
-      font-size: 2.8rem;
-      margin-bottom: 18px;
-      font-weight: 800;
-      text-shadow: 0 2px 16px #000a;
-      letter-spacing: 1px;
-    }
-    .hero p {
-      font-size: 1.25rem;
-      margin-bottom: 28px;
-      color: #b5e3c8;
-      font-weight: 500;
-    }
-    .cta-btn {
-      background: #00ff6a;
-      color: #10141a;
-      font-weight: 800;
-      font-size: 1.2rem;
-      border: 2px solid #00ff6a;
-      border-radius: 10px;
-      padding: 18px 44px;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-      margin-bottom: 8px;
-      box-shadow: 0 2px 16px #00ff6a33;
-    }
-    .cta-btn:hover {
-      background: #10141a;
-      color: #00ff6a;
-    }
-    .hero-img {
-      flex: 1 1 40%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 220px;
-      z-index: 1;
-    }
-    .hero-img img {
-      max-width: 260px;
-      width: 100%;
-      filter: drop-shadow(0 4px 32px #00ff6a55);
-    }
-    .steps {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      margin-bottom: 32px;
-    }
-    .step {
-      background: #181e26;
-      border-radius: 14px;
-      box-shadow: 0 2px 12px #00ff6a11;
-      padding: 24px;
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      cursor: pointer;
-      transition: box-shadow 0.2s, border 0.2s;
-      border: 2px solid transparent;
-    }
-    .step.active, .step:hover {
-      border: 2px solid #00ff6a;
-      box-shadow: 0 4px 24px #00ff6a33;
-    }
-    .step-number {
-      background: #00ff6a;
-      color: #10141a;
-      font-size: 1.5rem;
-      font-weight: 700;
-      border-radius: 50%;
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 2px 8px #00ff6a44;
-    }
-    .step-content {
-      flex: 1;
-    }
-    .step-content h2 {
-      margin: 0 0 8px 0;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #00ff6a;
-    }
-    .step-content p {
-      margin: 0;
-      color: #b5e3c8;
-    }
-    .offer-section {
-      background: #181e26;
-      border-radius: 14px;
-      box-shadow: 0 2px 12px #00ff6a11;
-      padding: 36px 24px;
-      margin-bottom: 40px;
-      text-align: center;
-    }
-    .offers {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 24px;
-      justify-content: center;
-      margin-top: 16px;
-    }
-    .offer {
-      background: #10141a;
-      border: 2px solid #00ff6a;
-      border-radius: 12px;
-      padding: 28px 20px;
-      min-width: 220px;
-      flex: 1 1 220px;
-      max-width: 300px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       position: relative;
-      box-shadow: 0 2px 16px #00ff6a22;
+      z-index: 2;
+      max-width: 600px;
     }
-    .offer.best {
-      border: 2px solid #00ff6a;
-      background: #1a2b1a;
+    .hero-headline {
+      font-size: 2.6rem;
+      font-weight: 900;
+      color: var(--electric-blue);
+      margin-bottom: 18px;
+      line-height: 1.15;
+      text-shadow: 0 0 16px #00BFFF33;
     }
-    .offer .badge {
+    .hero-headline span {
+      color: var(--white);
+      display: block;
+    }
+    .hero-sub {
+      color: var(--neon-green);
+      font-size: 1.25rem;
+      margin-bottom: 32px;
+      font-weight: 600;
+    }
+    .hero-cta {
+      background: var(--neon-green);
+      color: var(--bg);
+      font-weight: 800;
+      font-size: 1.3rem;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 0 24px var(--neon-green2), 0 2px 16px #00FF9F44;
+      padding: 22px 54px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      margin-bottom: 18px;
+      letter-spacing: 0.5px;
+    }
+    .hero-cta:hover {
+      background: var(--bg);
+      color: var(--neon-green);
+      box-shadow: 0 0 32px var(--neon-green2);
+      border: 2px solid var(--neon-green);
+    }
+    .hero-chart {
       position: absolute;
-      top: -18px;
-      right: 16px;
-      background: #00ff6a;
-      color: #10141a;
-      font-weight: 700;
-      padding: 4px 12px;
-      border-radius: 8px;
+      right: 0; top: 50%;
+      transform: translateY(-50%);
+      z-index: 1;
+      max-width: 480px;
+      width: 40vw;
+      opacity: 0.95;
+      pointer-events: none;
+      filter: drop-shadow(0 0 32px #00FF9F44);
+    }
+    /* STORY SECTION */
+    .story-section {
+      background: var(--card);
+      border-radius: 18px;
+      margin: 0 auto 48px auto;
+      padding: 48px 32px 32px 32px;
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      box-shadow: 0 2px 32px #00BFFF11;
+      position: relative;
+      max-width: 1000px;
+    }
+    .story-left, .story-right {
+      flex: 1 1 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+    }
+    .story-left img, .story-right img {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 16px #FF3B3B44, 0 0 24px #00FF9F22;
+    }
+    .story-left .trader-face {
+      border: 2px solid #FF3B3B;
+    }
+    .story-right .trader-face {
+      border: 2px solid var(--neon-green);
+    }
+    .story-center {
+      flex: 2 1 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+    }
+    .testimonial {
+      background: #10141a;
+      border-radius: 12px;
+      padding: 18px 24px;
+      color: var(--white);
+      font-size: 1.1rem;
+      font-weight: 500;
+      box-shadow: 0 2px 12px #00FF9F22;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .testimonial .icon {
+      color: var(--neon-green);
+      font-size: 1.5rem;
+    }
+    .verified-badge {
+      background: var(--electric-blue2);
+      color: var(--white);
       font-size: 0.95rem;
-      box-shadow: 0 2px 8px #00ff6a44;
+      font-weight: 700;
+      border-radius: 8px;
+      padding: 4px 12px;
+      display: inline-block;
+      margin-top: 6px;
+      box-shadow: 0 2px 8px #00BFFF44;
     }
-    .offer h3 {
-      margin: 0 0 8px 0;
+    /* OFFER SECTION */
+    .offer-section {
+      background: var(--card);
+      border-radius: 18px;
+      margin: 0 auto 48px auto;
+      padding: 48px 32px 32px 32px;
+      text-align: center;
+      box-shadow: 0 2px 32px #00FF9F11;
+      max-width: 500px;
+    }
+    .price-strike {
+      color: var(--gray);
+      text-decoration: line-through;
       font-size: 1.2rem;
-      font-weight: 700;
-      color: #00ff6a;
+      margin-bottom: 0;
+      display: block;
     }
-    .offer .price {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #00ff6a;
-      margin: 8px 0 12px 0;
-      text-shadow: 0 2px 8px #00ff6a33;
+    .price-main {
+      color: var(--neon-green);
+      font-size: 2.8rem;
+      font-weight: 900;
+      margin: 0 0 8px 0;
+      text-shadow: 0 0 16px #00FF9F44;
     }
-    .offer ul {
+    .offer-badge {
+      background: var(--electric-blue2);
+      color: var(--white);
+      font-weight: 700;
+      border-radius: 8px;
+      padding: 4px 16px;
+      font-size: 1.1rem;
+      margin-bottom: 18px;
+      display: inline-block;
+      box-shadow: 0 2px 8px #00BFFF44;
+    }
+    .offer-features {
       list-style: none;
       padding: 0;
-      margin: 0 0 16px 0;
-      color: #b5e3c8;
-      font-size: 1rem;
-    }
-    .offer ul li {
-      margin-bottom: 6px;
-    }
-    .offer .offer-btn {
-      background: #00ff6a;
-      color: #10141a;
-      font-weight: 700;
-      border: none;
-      border-radius: 8px;
-      padding: 12px 28px;
+      margin: 18px 0 18px 0;
+      color: var(--white);
       font-size: 1.1rem;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-      box-shadow: 0 2px 8px #00ff6a33;
+      text-align: left;
     }
-    .offer .offer-btn:hover {
-      background: #10141a;
-      color: #00ff6a;
-      border: 2px solid #00ff6a;
+    .offer-features li {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .guarantee {
-      margin-top: 18px;
-      color: #00ff6a;
-      font-weight: 600;
-      font-size: 1rem;
-    }
-    .social-proof {
-      background: #10141a;
-      border-radius: 10px;
-      padding: 18px 24px;
-      margin-bottom: 32px;
-      text-align: center;
-      border: 1.5px solid #00ff6a;
-      box-shadow: 0 2px 12px #00ff6a22;
-    }
-    .social-proof .stars {
-      color: #00ff6a;
+    .offer-features .check {
+      color: var(--neon-green);
       font-size: 1.3rem;
-      margin-bottom: 6px;
-      text-shadow: 0 2px 8px #00ff6a33;
     }
-    .faq-section {
-      background: #181e26;
+    .scarcity {
+      color: var(--scarcity);
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .payment-badges {
+      margin: 18px 0 18px 0;
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+    }
+    .payment-badges img {
+      height: 32px;
+      filter: grayscale(0.2) brightness(1.2) drop-shadow(0 0 8px #00BFFF44);
+    }
+    .offer-cta {
+      background: var(--neon-green);
+      color: var(--bg);
+      font-weight: 800;
+      font-size: 1.2rem;
+      border: none;
       border-radius: 12px;
-      box-shadow: 0 2px 12px #00ff6a11;
-      padding: 32px 24px;
-      margin-bottom: 40px;
-    }
-    .faq-section h2 {
-      margin-top: 0;
-      font-size: 1.3rem;
-      color: #00ff6a;
-    }
-    .faq {
-      margin-bottom: 18px;
-    }
-    .faq-question {
-      font-weight: 700;
-      color: #00ff6a;
-      margin-bottom: 4px;
-    }
-    .faq-answer {
-      color: #b5e3c8;
-      margin-bottom: 0;
-    }
-    .sticky-cta {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100vw;
-      background: #10141a;
-      color: #00ff6a;
-      text-align: center;
-      padding: 18px 0 12px 0;
-      z-index: 100;
-      box-shadow: 0 -2px 8px #00ff6a33;
-      border-top: 2px solid #00ff6a;
-    }
-    .sticky-cta button {
-      background: #00ff6a;
-      color: #10141a;
-      font-weight: 700;
-      border: none;
-      border-radius: 8px;
-      padding: 12px 32px;
-      font-size: 1.1rem;
+      box-shadow: 0 0 24px var(--neon-green2), 0 2px 16px #00FF9F44;
+      padding: 18px 44px;
       cursor: pointer;
-      margin-top: 8px;
-      transition: background 0.2s, color 0.2s;
-      box-shadow: 0 2px 8px #00ff6a33;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      margin-top: 12px;
+      letter-spacing: 0.5px;
     }
-    .sticky-cta button:hover {
+    .offer-cta:hover {
+      background: var(--bg);
+      color: var(--neon-green);
+      box-shadow: 0 0 32px var(--neon-green2);
+      border: 2px solid var(--neon-green);
+    }
+    /* BONUS STRIP */
+    .bonus-strip {
       background: #10141a;
-      color: #00ff6a;
-      border: 2px solid #00ff6a;
+      border-radius: 12px;
+      margin: 0 auto 48px auto;
+      padding: 18px 0;
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      box-shadow: 0 2px 12px #00BFFF22;
+      max-width: 900px;
     }
-    @media (max-width: 700px) {
-      .container {
-        padding: 8px;
-      }
-      .offers {
-        flex-direction: column;
-        gap: 16px;
-      }
-      .step {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-      }
-      .hero {
-        flex-direction: column;
-        gap: 18px;
-        min-height: 0;
-        text-align: left;
-      }
-      .hero-img img {
-        max-width: 180px;
-      }
+    .bonus-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: var(--electric-blue2);
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    .bonus-item .icon {
+      font-size: 2rem;
+      color: var(--neon-green);
+      filter: drop-shadow(0 0 8px #00FF9F44);
+    }
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero { flex-direction: column; min-height: 0; padding: 48px 0 32px 0; }
+      .hero-content { max-width: 100%; }
+      .hero-chart { display: none; }
+      .story-section { flex-direction: column; gap: 18px; padding: 32px 12px; }
+      .bonus-strip { flex-direction: column; gap: 18px; padding: 18px 0; }
+      .offer-section { padding: 32px 12px; }
+    }
+    @media (max-width: 600px) {
+      .hero-headline { font-size: 1.5rem; }
+      .hero-sub { font-size: 1rem; }
+      .offer-section { padding: 18px 4px; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="hero">
-      <div class="hero-content">
-        <img src="robot-logo.png" alt="Trading Bot Logo" style="height:64px;margin-bottom:18px;filter:drop-shadow(0 2px 8px #00ff6a88);border-radius:16px;">
-        <h1>SIGNAL TRADING BOT DEVELOPMENT</h1>
-        <p>Signal bots provide traders with real-time market insights and signals, helping them make informed decisions and refine their trading strategies.</p>
-        <button class="cta-btn" onclick="scrollToStep(1)">Get A Live Demo</button>
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="container hero-content">
+      <h1 class="hero-headline">
+        Wall Street Traders Hate This...<br>
+        <span>Because It Lets Regular People Steal 20–80 Pips a Day on Autopilot</span>
+      </h1>
+      <div class="hero-sub">
+        The Set-It-and-Forget-It MetaTrader Bot That's Quietly Banking Consistent Profits – Without Watching Charts 24/7
       </div>
-      <div class="hero-img">
-        <img src="robot-logo.png" alt="Trading Bot" style="max-width:260px;width:100%;filter:drop-shadow(0 4px 32px #00ff6a55);border-radius:24px;" />
-      </div>
+      <button class="hero-cta">Get Instant Access for $49.97 →</button>
     </div>
+    <!-- Optionally, you can add a chart image here for desktop -->
+    <!-- <img class="hero-chart" src="mt4-chart-mockup.png" alt="MetaTrader Chart" /> -->
+  </section>
 
-    <div class="steps" id="steps">
-      <div class="step active" onclick="activateStep(0)">
-        <div class="step-number">1</div>
-        <div class="step-content">
-          <h2>Discover the Problem</h2>
-          <p>Manual trading is stressful, time-consuming, and often unprofitable. Most traders lose money due to emotion and lack of time.</p>
-        </div>
-      </div>
-      <div class="step" onclick="activateStep(1)">
-        <div class="step-number">2</div>
-        <div class="step-content">
-          <h2>See the Solution</h2>
-          <p>Our AI-powered trading bots automate your trades, maximize profits, and minimize risk—24/7.</p>
-        </div>
-      </div>
-      <div class="step" onclick="activateStep(2)">
-        <div class="step-number">3</div>
-        <div class="step-content">
-          <h2>Join the Success</h2>
-          <p>Join 2,000+ traders who’ve automated their success! Read real testimonials and see results.</p>
-        </div>
-      </div>
-      <div class="step" onclick="activateStep(3)">
-        <div class="step-number">4</div>
-        <div class="step-content">
-          <h2>Choose Your Offer</h2>
-          <p>Pick the best plan for you and get lifetime support and free setup. 30-day money-back guarantee.</p>
-        </div>
-      </div>
+  <!-- STORY / TRUST SECTION -->
+  <section class="story-section">
+    <div class="story-left">
+      <img class="trader-face" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Stressed Trader" />
+      <div style="color:#FF3B3B;font-weight:700;">Losing Trades</div>
     </div>
+    <div class="story-center">
+      <div class="testimonial"><span class="icon">✔️</span> “I used to lose sleep over red trades. Now my bot quietly banks pips while I live my life.”</div>
+      <div class="testimonial"><span class="icon">💬</span> “I was skeptical, but the verified results speak for themselves.”</div>
+      <span class="verified-badge">Myfxbook Verified</span>
+    </div>
+    <div class="story-right">
+      <img class="trader-face" src="https://randomuser.me/api/portraits/men/85.jpg" alt="Happy Trader" />
+      <div style="color:var(--neon-green);font-weight:700;">Profitable Trades</div>
+    </div>
+  </section>
 
-    <div class="social-proof">
-      <div class="stars">★★★★★</div>
-      <div>“Doubled my returns in 2 months!” — Real User</div>
-      <div style="margin-top:8px; color:#2563eb; font-weight:600;">Supported Exchanges: Binance, Coinbase, Kraken, and more</div>
+  <!-- OFFER / PRICING SECTION -->
+  <section class="offer-section">
+    <span class="price-strike">$497</span>
+    <div class="price-main">$49.97</div>
+    <span class="offer-badge">One-Time Payment – Lifetime Access</span>
+    <ul class="offer-features">
+      <li><span class="check">✔️</span> Works on MetaTrader 4 & 5</li>
+      <li><span class="check">✔️</span> Lifetime Updates & Support</li>
+      <li><span class="check">✔️</span> No Monthly Fees, Ever</li>
+      <li><span class="check">✔️</span> Step-by-Step Setup Guide</li>
+      <li><span class="check">✔️</span> 30-Day Money-Back Guarantee</li>
+    </ul>
+    <span class="scarcity">Only 150 Copies at This Price</span>
+    <div class="payment-badges">
+      <img src="https://cdn-icons-png.flaticon.com/512/196/196566.png" alt="Stripe" />
+      <img src="https://cdn-icons-png.flaticon.com/512/196/196565.png" alt="PayPal" />
     </div>
+    <button class="offer-cta">Yes, Give Me Autopilot Profits Now!</button>
+  </section>
 
-    <div class="offer-section" id="offer">
-      <h2>Choose Your Plan</h2>
-      <div class="offers">
-        <div class="offer">
-          <h3>Single Bot</h3>
-          <div class="price">$49.97</div>
-          <ul>
-            <li>1 Trading Bot</li>
-            <li>Lifetime Support</li>
-            <li>Free Setup</li>
-          </ul>
-          <button class="offer-btn" onclick="checkout('single')">Get Started</button>
-        </div>
-        <div class="offer best">
-          <div class="badge">Best Value</div>
-          <h3>Three Bots</h3>
-          <div class="price">$99.97</div>
-          <ul>
-            <li>3 Trading Bots</li>
-            <li>Lifetime Support</li>
-            <li>Free Setup</li>
-            <li style="color:#fbbf24; font-weight:600;">Save 33%</li>
-          </ul>
-          <button class="offer-btn" onclick="checkout('bundle')">Upgrade Now</button>
-        </div>
-      </div>
-      <div class="guarantee">30-day money-back guarantee. No questions asked.</div>
-    </div>
+  <!-- BONUS / GUARANTEE STRIP -->
+  <section class="bonus-strip">
+    <div class="bonus-item"><span class="icon">📘</span> Setup Guide</div>
+    <div class="bonus-item"><span class="icon">📝</span> Cheat Sheet</div>
+    <div class="bonus-item"><span class="icon">📊</span> Risk Calculator</div>
+    <div class="bonus-item"><span class="icon">🛡️</span> 30-Day Guarantee</div>
+  </section>
 
-    <div class="faq-section">
-      <h2>Frequently Asked Questions</h2>
-      <div class="faq">
-        <div class="faq-question">Is this safe?</div>
-        <div class="faq-answer">Yes, your funds remain on your exchange. Our bots use secure API connections and never withdraw funds.</div>
-      </div>
-      <div class="faq">
-        <div class="faq-question">How do I install the bot?</div>
-        <div class="faq-answer">We offer free setup and step-by-step guidance. Most users are up and running in under 10 minutes.</div>
-      </div>
-      <div class="faq">
-        <div class="faq-question">What exchanges are supported?</div>
-        <div class="faq-answer">We support all major tier-one exchanges including Binance, Coinbase, and Kraken.</div>
-      </div>
-      <div class="faq">
-        <div class="faq-question">What if I need help?</div>
-        <div class="faq-answer">Lifetime support is included with every purchase. Our team is here for you 24/7.</div>
-      </div>
-    </div>
-  </div>
-  <div class="sticky-cta">
-    <div>Ready to automate your trading?</div>
-    <button onclick="scrollToOffer()">Start Automating Now</button>
-  </div>
-  <script>
-    // Step navigation logic
-    const steps = document.querySelectorAll('.step');
-    function activateStep(idx) {
-      steps.forEach((step, i) => {
-        if (i === idx) {
-          step.classList.add('active');
-          step.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } else {
-          step.classList.remove('active');
-        }
-      });
-    }
-    function scrollToStep(idx) {
-      activateStep(idx);
-    }
-    function scrollToOffer() {
-      document.getElementById('offer').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-    function checkout(plan) {
-      alert('Checkout for: ' + (plan === 'single' ? 'Single Bot ($49.97)' : 'Three Bots ($99.97)'));
-      // Here you would redirect to your checkout page or open a modal
-    }
-  </script>
 </body>
 </html>
