@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Automated Trading Bot Funnel</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: #10141a;
+      color: #e5e7eb;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    .hero {
+      background: linear-gradient(90deg, #10141a 70%, #1a1f2b 100%);
+      color: #fff;
+      padding: 56px 24px 40px 24px;
+      border-radius: 20px;
+      text-align: left;
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      position: relative;
+      min-height: 340px;
+    }
+    .hero-content {
+      flex: 1 1 60%;
+      z-index: 2;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 18px;
+      font-weight: 800;
+      text-shadow: 0 2px 16px #000a;
+      letter-spacing: 1px;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      margin-bottom: 28px;
+      color: #b5e3c8;
+      font-weight: 500;
+    }
+    .cta-btn {
+      background: #00ff6a;
+      color: #10141a;
+      font-weight: 800;
+      font-size: 1.2rem;
+      border: 2px solid #00ff6a;
+      border-radius: 10px;
+      padding: 18px 44px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      margin-bottom: 8px;
+      box-shadow: 0 2px 16px #00ff6a33;
+    }
+    .cta-btn:hover {
+      background: #10141a;
+      color: #00ff6a;
+    }
+    .hero-img {
+      flex: 1 1 40%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 220px;
+      z-index: 1;
+    }
+    .hero-img img {
+      max-width: 260px;
+      width: 100%;
+      filter: drop-shadow(0 4px 32px #00ff6a55);
+    }
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    .step {
+      background: #181e26;
+      border-radius: 14px;
+      box-shadow: 0 2px 12px #00ff6a11;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      cursor: pointer;
+      transition: box-shadow 0.2s, border 0.2s;
+      border: 2px solid transparent;
+    }
+    .step.active, .step:hover {
+      border: 2px solid #00ff6a;
+      box-shadow: 0 4px 24px #00ff6a33;
+    }
+    .step-number {
+      background: #00ff6a;
+      color: #10141a;
+      font-size: 1.5rem;
+      font-weight: 700;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px #00ff6a44;
+    }
+    .step-content {
+      flex: 1;
+    }
+    .step-content h2 {
+      margin: 0 0 8px 0;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #00ff6a;
+    }
+    .step-content p {
+      margin: 0;
+      color: #b5e3c8;
+    }
+    .offer-section {
+      background: #181e26;
+      border-radius: 14px;
+      box-shadow: 0 2px 12px #00ff6a11;
+      padding: 36px 24px;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    .offers {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+      margin-top: 16px;
+    }
+    .offer {
+      background: #10141a;
+      border: 2px solid #00ff6a;
+      border-radius: 12px;
+      padding: 28px 20px;
+      min-width: 220px;
+      flex: 1 1 220px;
+      max-width: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      box-shadow: 0 2px 16px #00ff6a22;
+    }
+    .offer.best {
+      border: 2px solid #00ff6a;
+      background: #1a2b1a;
+    }
+    .offer .badge {
+      position: absolute;
+      top: -18px;
+      right: 16px;
+      background: #00ff6a;
+      color: #10141a;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      box-shadow: 0 2px 8px #00ff6a44;
+    }
+    .offer h3 {
+      margin: 0 0 8px 0;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #00ff6a;
+    }
+    .offer .price {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #00ff6a;
+      margin: 8px 0 12px 0;
+      text-shadow: 0 2px 8px #00ff6a33;
+    }
+    .offer ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 16px 0;
+      color: #b5e3c8;
+      font-size: 1rem;
+    }
+    .offer ul li {
+      margin-bottom: 6px;
+    }
+    .offer .offer-btn {
+      background: #00ff6a;
+      color: #10141a;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 28px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      box-shadow: 0 2px 8px #00ff6a33;
+    }
+    .offer .offer-btn:hover {
+      background: #10141a;
+      color: #00ff6a;
+      border: 2px solid #00ff6a;
+    }
+    .guarantee {
+      margin-top: 18px;
+      color: #00ff6a;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .social-proof {
+      background: #10141a;
+      border-radius: 10px;
+      padding: 18px 24px;
+      margin-bottom: 32px;
+      text-align: center;
+      border: 1.5px solid #00ff6a;
+      box-shadow: 0 2px 12px #00ff6a22;
+    }
+    .social-proof .stars {
+      color: #00ff6a;
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+      text-shadow: 0 2px 8px #00ff6a33;
+    }
+    .faq-section {
+      background: #181e26;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px #00ff6a11;
+      padding: 32px 24px;
+      margin-bottom: 40px;
+    }
+    .faq-section h2 {
+      margin-top: 0;
+      font-size: 1.3rem;
+      color: #00ff6a;
+    }
+    .faq {
+      margin-bottom: 18px;
+    }
+    .faq-question {
+      font-weight: 700;
+      color: #00ff6a;
+      margin-bottom: 4px;
+    }
+    .faq-answer {
+      color: #b5e3c8;
+      margin-bottom: 0;
+    }
+    .sticky-cta {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100vw;
+      background: #10141a;
+      color: #00ff6a;
+      text-align: center;
+      padding: 18px 0 12px 0;
+      z-index: 100;
+      box-shadow: 0 -2px 8px #00ff6a33;
+      border-top: 2px solid #00ff6a;
+    }
+    .sticky-cta button {
+      background: #00ff6a;
+      color: #10141a;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 32px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.2s, color 0.2s;
+      box-shadow: 0 2px 8px #00ff6a33;
+    }
+    .sticky-cta button:hover {
+      background: #10141a;
+      color: #00ff6a;
+      border: 2px solid #00ff6a;
+    }
+    @media (max-width: 700px) {
+      .container {
+        padding: 8px;
+      }
+      .offers {
+        flex-direction: column;
+        gap: 16px;
+      }
+      .step {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .hero {
+        flex-direction: column;
+        gap: 18px;
+        min-height: 0;
+        text-align: left;
+      }
+      .hero-img img {
+        max-width: 180px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="hero">
+      <div class="hero-content">
+        <img src="https://i.ibb.co/6b6n6k2/breedcoins-logo.png" alt="Breedcoins Logo" style="height:38px;margin-bottom:18px;filter:drop-shadow(0 2px 8px #00ff6a88);">
+        <h1>SIGNAL TRADING BOT DEVELOPMENT</h1>
+        <p>Signal bots provide traders with real-time market insights and signals, helping them make informed decisions and refine their trading strategies.</p>
+        <button class="cta-btn" onclick="scrollToStep(1)">Get A Live Demo</button>
+      </div>
+      <div class="hero-img">
+        <img src="https://i.ibb.co/6b6n6k2/robot-hero.png" alt="Trading Bot" />
+      </div>
+    </div>
+
+    <div class="steps" id="steps">
+      <div class="step active" onclick="activateStep(0)">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h2>Discover the Problem</h2>
+          <p>Manual trading is stressful, time-consuming, and often unprofitable. Most traders lose money due to emotion and lack of time.</p>
+        </div>
+      </div>
+      <div class="step" onclick="activateStep(1)">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h2>See the Solution</h2>
+          <p>Our AI-powered trading bots automate your trades, maximize profits, and minimize risk—24/7.</p>
+        </div>
+      </div>
+      <div class="step" onclick="activateStep(2)">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h2>Join the Success</h2>
+          <p>Join 2,000+ traders who’ve automated their success! Read real testimonials and see results.</p>
+        </div>
+      </div>
+      <div class="step" onclick="activateStep(3)">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h2>Choose Your Offer</h2>
+          <p>Pick the best plan for you and get lifetime support and free setup. 30-day money-back guarantee.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="social-proof">
+      <div class="stars">★★★★★</div>
+      <div>“Doubled my returns in 2 months!” — Real User</div>
+      <div style="margin-top:8px; color:#2563eb; font-weight:600;">Supported Exchanges: Binance, Coinbase, Kraken, and more</div>
+    </div>
+
+    <div class="offer-section" id="offer">
+      <h2>Choose Your Plan</h2>
+      <div class="offers">
+        <div class="offer">
+          <h3>Single Bot</h3>
+          <div class="price">$49.97</div>
+          <ul>
+            <li>1 Trading Bot</li>
+            <li>Lifetime Support</li>
+            <li>Free Setup</li>
+          </ul>
+          <button class="offer-btn" onclick="checkout('single')">Get Started</button>
+        </div>
+        <div class="offer best">
+          <div class="badge">Best Value</div>
+          <h3>Three Bots</h3>
+          <div class="price">$99.97</div>
+          <ul>
+            <li>3 Trading Bots</li>
+            <li>Lifetime Support</li>
+            <li>Free Setup</li>
+            <li style="color:#fbbf24; font-weight:600;">Save 33%</li>
+          </ul>
+          <button class="offer-btn" onclick="checkout('bundle')">Upgrade Now</button>
+        </div>
+      </div>
+      <div class="guarantee">30-day money-back guarantee. No questions asked.</div>
+    </div>
+
+    <div class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq">
+        <div class="faq-question">Is this safe?</div>
+        <div class="faq-answer">Yes, your funds remain on your exchange. Our bots use secure API connections and never withdraw funds.</div>
+      </div>
+      <div class="faq">
+        <div class="faq-question">How do I install the bot?</div>
+        <div class="faq-answer">We offer free setup and step-by-step guidance. Most users are up and running in under 10 minutes.</div>
+      </div>
+      <div class="faq">
+        <div class="faq-question">What exchanges are supported?</div>
+        <div class="faq-answer">We support all major tier-one exchanges including Binance, Coinbase, and Kraken.</div>
+      </div>
+      <div class="faq">
+        <div class="faq-question">What if I need help?</div>
+        <div class="faq-answer">Lifetime support is included with every purchase. Our team is here for you 24/7.</div>
+      </div>
+    </div>
+  </div>
+  <div class="sticky-cta">
+    <div>Ready to automate your trading?</div>
+    <button onclick="scrollToOffer()">Start Automating Now</button>
+  </div>
+  <script>
+    // Step navigation logic
+    const steps = document.querySelectorAll('.step');
+    function activateStep(idx) {
+      steps.forEach((step, i) => {
+        if (i === idx) {
+          step.classList.add('active');
+          step.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          step.classList.remove('active');
+        }
+      });
+    }
+    function scrollToStep(idx) {
+      activateStep(idx);
+    }
+    function scrollToOffer() {
+      document.getElementById('offer').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    function checkout(plan) {
+      alert('Checkout for: ' + (plan === 'single' ? 'Single Bot ($49.97)' : 'Three Bots ($99.97)'));
+      // Here you would redirect to your checkout page or open a modal
+    }
+  </script>
+</body>
+</html>
