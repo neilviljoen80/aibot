@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MetaTrader 4/5 Bot | Autopilot Profits</title>
-  <link href="https://fonts.googleapis.com/css?family=Inter:400,600,700,900&display=swap" rel="stylesheet">
+  <title>Galactus EA Bot v5.2 - Wall Street Insiders Hate This Bot</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #0A0F14;
@@ -19,355 +19,918 @@
       --scarcity: #FF7F50;
       --white: #fff;
       --gray: #B0B8C1;
+      --gold: #FFD700;
     }
-    html, body {
+    
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
       font-family: 'Inter', Arial, sans-serif;
       background: var(--bg);
       color: var(--text-main);
-      box-sizing: border-box;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
+    
     .container {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 0 20px;
     }
+    
     /* HERO SECTION */
     .hero {
-      width: 100vw;
-      min-height: 600px;
-      background: var(--bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 64px 0 48px 0;
+      background: linear-gradient(135deg, #0A0F14 0%, #131922 50%, #0A0F14 100%);
+      padding: 80px 20px 60px;
+      text-align: center;
       position: relative;
       overflow: hidden;
     }
-    .hero-bg {
+    
+    .hero::before {
+      content: '';
       position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: url('robot-logo.png') no-repeat right 8% center/420px, linear-gradient(90deg, #0A0F14 60%, #131922 100%);
-      opacity: 0.13;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('robot-logo.png') no-repeat center right;
+      background-size: 500px;
+      opacity: 0.08;
       z-index: 0;
     }
+    
     .hero-content {
       position: relative;
       z-index: 2;
-      max-width: 600px;
+      max-width: 900px;
+      margin: 0 auto;
     }
+    
+    .hero-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--danger), #FF6B6B);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 15px rgba(255, 59, 59, 0.3);
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
     .hero-headline {
-      font-size: 2.6rem;
+      font-size: clamp(2rem, 5vw, 3.5rem);
       font-weight: 900;
-      color: var(--electric-blue);
-      margin-bottom: 18px;
-      line-height: 1.15;
-      text-shadow: 0 0 16px #00BFFF33;
+      line-height: 1.2;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, var(--electric-blue), var(--neon-green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 30px rgba(0, 191, 255, 0.3);
     }
-    .hero-headline span {
-      color: var(--white);
-      display: block;
-    }
-    .hero-sub {
+    
+    .hero-subheadline {
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
       color: var(--neon-green);
-      font-size: 1.25rem;
-      margin-bottom: 32px;
       font-weight: 600;
+      margin-bottom: 32px;
+      line-height: 1.4;
     }
-    .hero-cta {
-      background: var(--neon-green);
+    
+    .hero-description {
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--neon-green), var(--neon-green2));
       color: var(--bg);
       font-weight: 800;
-      font-size: 1.3rem;
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      padding: 20px 50px;
+      border-radius: 12px;
+      text-decoration: none;
       border: none;
-      border-radius: 12px;
-      box-shadow: 0 0 24px var(--neon-green2), 0 2px 16px #00FF9F44;
-      padding: 22px 54px;
       cursor: pointer;
-      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-      margin-bottom: 18px;
-      letter-spacing: 0.5px;
-    }
-    .hero-cta:hover {
-      background: var(--bg);
-      color: var(--neon-green);
-      box-shadow: 0 0 32px var(--neon-green2);
-      border: 2px solid var(--neon-green);
-    }
-    .hero-chart {
-      position: absolute;
-      right: 0; top: 50%;
-      transform: translateY(-50%);
-      z-index: 1;
-      max-width: 480px;
-      width: 40vw;
-      opacity: 0.95;
-      pointer-events: none;
-      filter: drop-shadow(0 0 32px #00FF9F44);
-    }
-    /* STORY SECTION */
-    .story-section {
-      background: var(--card);
-      border-radius: 18px;
-      margin: 0 auto 48px auto;
-      padding: 48px 32px 32px 32px;
-      display: flex;
-      gap: 32px;
-      align-items: center;
-      box-shadow: 0 2px 32px #00BFFF11;
+      box-shadow: 0 8px 30px rgba(0, 255, 159, 0.4), 0 0 40px rgba(0, 255, 159, 0.2);
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 10px;
       position: relative;
-      max-width: 1000px;
+      overflow: hidden;
     }
-    .story-left, .story-right {
-      flex: 1 1 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 18px;
-    }
-    .story-left img, .story-right img {
-      width: 90px;
-      height: 90px;
+    
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
       border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 0 16px #FF3B3B44, 0 0 24px #00FF9F22;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
     }
-    .story-left .trader-face {
-      border: 2px solid #FF3B3B;
+    
+    .cta-button:hover::before {
+      width: 300px;
+      height: 300px;
     }
-    .story-right .trader-face {
-      border: 2px solid var(--neon-green);
+    
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0, 255, 159, 0.5), 0 0 60px rgba(0, 255, 159, 0.3);
     }
-    .story-center {
-      flex: 2 1 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 18px;
+    
+    .cta-button:active {
+      transform: translateY(-1px);
     }
-    .testimonial {
-      background: #10141a;
-      border-radius: 12px;
-      padding: 18px 24px;
-      color: var(--white);
+    
+    .price-highlight {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      color: var(--neon-green);
+      font-weight: 900;
+      margin: 20px 0;
+      text-shadow: 0 0 20px rgba(0, 255, 159, 0.5);
+    }
+    
+    .risk-disclaimer {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-top: 30px;
+      padding: 15px;
+      background: rgba(255, 59, 59, 0.1);
+      border-left: 3px solid var(--danger);
+      border-radius: 5px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    /* TESTIMONIALS SECTION */
+    .testimonials {
+      padding: 60px 20px;
+      background: var(--card);
+    }
+    
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    .testimonial-card {
+      background: linear-gradient(135deg, #1a1f2e, #131922);
+      padding: 30px;
+      border-radius: 15px;
+      border: 1px solid rgba(0, 255, 159, 0.2);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 35px rgba(0, 255, 159, 0.2);
+      border-color: rgba(0, 255, 159, 0.4);
+    }
+    
+    .testimonial-text {
       font-size: 1.1rem;
-      font-weight: 500;
-      box-shadow: 0 2px 12px #00FF9F22;
-      margin-bottom: 8px;
+      font-style: italic;
+      color: var(--text-main);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    
+    .testimonial-author {
       display: flex;
       align-items: center;
       gap: 12px;
     }
-    .testimonial .icon {
-      color: var(--neon-green);
-      font-size: 1.5rem;
+    
+    .testimonial-author img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 2px solid var(--neon-green);
     }
-    .verified-badge {
-      background: var(--electric-blue2);
-      color: var(--white);
-      font-size: 0.95rem;
+    
+    .testimonial-info {
+      flex: 1;
+    }
+    
+    .testimonial-name {
       font-weight: 700;
-      border-radius: 8px;
-      padding: 4px 12px;
+      color: var(--neon-green);
+      font-size: 1rem;
+    }
+    
+    .testimonial-location {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+    
+    .verified-badge {
       display: inline-block;
-      margin-top: 6px;
-      box-shadow: 0 2px 8px #00BFFF44;
+      background: var(--electric-blue2);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 5px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-top: 5px;
     }
-    /* OFFER SECTION */
-    .offer-section {
-      background: var(--card);
-      border-radius: 18px;
-      margin: 0 auto 48px auto;
-      padding: 48px 32px 32px 32px;
+    
+    /* STORY SECTION */
+    .story-section {
+      padding: 80px 20px;
+      background: var(--bg);
+    }
+    
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
       text-align: center;
-      box-shadow: 0 2px 32px #00FF9F11;
-      max-width: 500px;
+      margin-bottom: 50px;
+      background: linear-gradient(135deg, var(--electric-blue), var(--neon-green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    .price-strike {
-      color: var(--gray);
-      text-decoration: line-through;
+    
+    .story-content {
+      max-width: 900px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+    
+    .story-content p {
+      margin-bottom: 25px;
+    }
+    
+    .story-content strong {
+      color: var(--neon-green);
+      font-weight: 700;
+    }
+    
+    .story-highlight {
+      background: linear-gradient(135deg, rgba(0, 255, 159, 0.1), rgba(0, 191, 255, 0.1));
+      padding: 30px;
+      border-radius: 15px;
+      border-left: 4px solid var(--neon-green);
+      margin: 30px 0;
+    }
+    
+    .story-highlight strong {
+      color: var(--electric-blue);
       font-size: 1.2rem;
-      margin-bottom: 0;
+    }
+    
+    /* FEATURES SECTION */
+    .features-section {
+      padding: 80px 20px;
+      background: var(--card);
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+    
+    .feature-card {
+      background: linear-gradient(135deg, #1a1f2e, #131922);
+      padding: 35px;
+      border-radius: 15px;
+      border: 1px solid rgba(0, 191, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(0, 191, 255, 0.5);
+      box-shadow: 0 15px 40px rgba(0, 191, 255, 0.2);
+    }
+    
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
       display: block;
     }
-    .price-main {
-      color: var(--neon-green);
-      font-size: 2.8rem;
-      font-weight: 900;
-      margin: 0 0 8px 0;
-      text-shadow: 0 0 16px #00FF9F44;
-    }
-    .offer-badge {
-      background: var(--electric-blue2);
-      color: var(--white);
+    
+    .feature-title {
+      font-size: 1.4rem;
       font-weight: 700;
-      border-radius: 8px;
-      padding: 4px 16px;
-      font-size: 1.1rem;
-      margin-bottom: 18px;
-      display: inline-block;
-      box-shadow: 0 2px 8px #00BFFF44;
+      color: var(--electric-blue);
+      margin-bottom: 15px;
     }
-    .offer-features {
-      list-style: none;
-      padding: 0;
-      margin: 18px 0 18px 0;
-      color: var(--white);
+    
+    .feature-description {
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    
+    /* OFFER SECTION */
+    .offer-section {
+      padding: 80px 20px;
+      background: var(--bg);
+      text-align: center;
+    }
+    
+    .offer-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #1a1f2e, #131922);
+      padding: 50px 40px;
+      border-radius: 20px;
+      border: 2px solid rgba(0, 255, 159, 0.3);
+      box-shadow: 0 20px 60px rgba(0, 255, 159, 0.2);
+    }
+    
+    .value-stack {
+      text-align: left;
+      margin: 40px 0;
+    }
+    
+    .value-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 20px;
+      padding: 15px;
+      background: rgba(0, 255, 159, 0.05);
+      border-radius: 10px;
+      border-left: 3px solid var(--neon-green);
+    }
+    
+    .value-item strong {
+      color: var(--neon-green);
       font-size: 1.1rem;
+    }
+    
+    .value-item .value-price {
+      color: var(--gold);
+      font-weight: 700;
+      margin-left: auto;
+    }
+    
+    .bonus-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      margin: 40px 0;
+    }
+    
+    .bonus-card {
+      background: rgba(0, 191, 255, 0.1);
+      padding: 25px;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 191, 255, 0.3);
       text-align: left;
     }
-    .offer-features li {
+    
+    .bonus-card h4 {
+      color: var(--electric-blue);
+      font-size: 1.2rem;
       margin-bottom: 10px;
       display: flex;
       align-items: center;
       gap: 10px;
     }
-    .offer-features .check {
-      color: var(--neon-green);
-      font-size: 1.3rem;
+    
+    .bonus-card h4::before {
+      content: '🎁';
+      font-size: 1.5rem;
     }
-    .scarcity {
+    
+    .bonus-card p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+    
+    .bonus-card .bonus-value {
+      color: var(--gold);
+      font-weight: 700;
+      margin-top: 10px;
+    }
+    
+    .total-value {
+      font-size: 2rem;
+      color: var(--gold);
+      font-weight: 900;
+      margin: 30px 0;
+      text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    }
+    
+    .current-price {
+      font-size: 3.5rem;
+      color: var(--neon-green);
+      font-weight: 900;
+      margin: 20px 0;
+      text-shadow: 0 0 30px rgba(0, 255, 159, 0.5);
+    }
+    
+    .price-comparison {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin: 20px 0;
+    }
+    
+    .old-price {
+      font-size: 1.5rem;
+      color: var(--gray);
+      text-decoration: line-through;
+    }
+    
+    .savings-badge {
+      background: var(--danger);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    
+    .scarcity-alert {
+      background: linear-gradient(135deg, rgba(255, 127, 80, 0.2), rgba(255, 59, 59, 0.2));
+      padding: 20px;
+      border-radius: 12px;
+      border: 2px solid var(--scarcity);
+      margin: 30px 0;
       color: var(--scarcity);
       font-weight: 700;
       font-size: 1.1rem;
-      margin-bottom: 12px;
-      display: block;
     }
-    .payment-badges {
-      margin: 18px 0 18px 0;
-      display: flex;
-      justify-content: center;
-      gap: 18px;
+    
+    /* GUARANTEE SECTION */
+    .guarantee-section {
+      padding: 60px 20px;
+      background: var(--card);
+      text-align: center;
     }
-    .payment-badges img {
-      height: 32px;
-      filter: grayscale(0.2) brightness(1.2) drop-shadow(0 0 8px #00BFFF44);
-    }
-    .offer-cta {
-      background: var(--neon-green);
-      color: var(--bg);
-      font-weight: 800;
-      font-size: 1.2rem;
-      border: none;
-      border-radius: 12px;
-      box-shadow: 0 0 24px var(--neon-green2), 0 2px 16px #00FF9F44;
-      padding: 18px 44px;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-      margin-top: 12px;
-      letter-spacing: 0.5px;
-    }
-    .offer-cta:hover {
-      background: var(--bg);
-      color: var(--neon-green);
-      box-shadow: 0 0 32px var(--neon-green2);
+    
+    .guarantee-box {
+      max-width: 700px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, rgba(0, 255, 159, 0.1), rgba(0, 191, 255, 0.1));
+      padding: 40px;
+      border-radius: 15px;
       border: 2px solid var(--neon-green);
     }
-    /* BONUS STRIP */
-    .bonus-strip {
-      background: #10141a;
-      border-radius: 12px;
-      margin: 0 auto 48px auto;
-      padding: 18px 0;
-      display: flex;
-      justify-content: center;
-      gap: 48px;
-      box-shadow: 0 2px 12px #00BFFF22;
-      max-width: 900px;
+    
+    .guarantee-icon {
+      font-size: 4rem;
+      margin-bottom: 20px;
     }
-    .bonus-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      color: var(--electric-blue2);
-      font-size: 1.1rem;
-      font-weight: 600;
-    }
-    .bonus-item .icon {
+    
+    .guarantee-title {
       font-size: 2rem;
+      font-weight: 900;
       color: var(--neon-green);
-      filter: drop-shadow(0 0 8px #00FF9F44);
+      margin-bottom: 20px;
     }
-    /* Responsive */
-    @media (max-width: 900px) {
-      .hero { flex-direction: column; min-height: 0; padding: 48px 0 32px 0; }
-      .hero-content { max-width: 100%; }
-      .hero-chart { display: none; }
-      .story-section { flex-direction: column; gap: 18px; padding: 32px 12px; }
-      .bonus-strip { flex-direction: column; gap: 18px; padding: 18px 0; }
-      .offer-section { padding: 32px 12px; }
+    
+    .guarantee-text {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 15px;
     }
-    @media (max-width: 600px) {
-      .hero-headline { font-size: 1.5rem; }
-      .hero-sub { font-size: 1rem; }
-      .offer-section { padding: 18px 4px; }
+    
+    .guarantee-highlight {
+      background: rgba(0, 255, 159, 0.2);
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 20px;
+      font-weight: 700;
+      color: var(--neon-green);
+    }
+    
+    /* FINAL CTA SECTION */
+    .final-cta-section {
+      padding: 80px 20px;
+      background: linear-gradient(135deg, #0A0F14 0%, #131922 100%);
+      text-align: center;
+    }
+    
+    .final-cta-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .final-cta-headline {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      margin-bottom: 30px;
+      background: linear-gradient(135deg, var(--neon-green), var(--electric-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    /* DISCLAIMER SECTION */
+    .disclaimer-section {
+      padding: 40px 20px;
+      background: var(--bg);
+      border-top: 2px solid rgba(255, 59, 59, 0.3);
+    }
+    
+    .disclaimer-content {
+      max-width: 900px;
+      margin: 0 auto;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+    
+    .disclaimer-content strong {
+      color: var(--danger);
+    }
+    
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 60px 20px 40px;
+      }
+      
+      .testimonial-grid,
+      .features-grid,
+      .bonus-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .offer-container {
+        padding: 30px 20px;
+      }
+      
+      .current-price {
+        font-size: 2.5rem;
+      }
+      
+      .price-comparison {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+    
+    /* SCROLL ANIMATIONS */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
 <body>
   <!-- HERO SECTION -->
   <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="container hero-content">
+    <div class="hero-content">
+      <div class="hero-badge">⚠️ Wall Street Insiders Hate This Bot</div>
       <h1 class="hero-headline">
-        Wall Street Traders Hate This...<br>
-        <span>Because It Lets Regular People Steal 20–80 Pips a Day on Autopilot</span>
+        Because It Lets Everyday Traders Like You Steal 20-80 Pips a Day on Autopilot—Without Staring at Charts 24/7!
       </h1>
-      <div class="hero-sub">
-        The Set-It-and-Forget-It MetaTrader Bot That's Quietly Banking Consistent Profits – Without Watching Charts 24/7
+      <p class="hero-subheadline">
+        The "Set-It-and-Forget-It" MetaTrader EA That's Quietly Banking Consistent Profits for Regular Folks... Even in Volatile Markets.
+      </p>
+      <p class="hero-description">
+        Get Instant Access for Just <span class="price-highlight">$49.97</span> (Limited-Time Intro Price—Act Now Before It Jumps to $97!)
+      </p>
+      <a href="#offer" class="cta-button">Claim Your Bot Now →</a>
+      <div class="risk-disclaimer">
+        <strong>Risk Disclaimer:</strong> Trading forex involves significant risk of loss and is not suitable for all investors. Past performance (including backtests showing 20-80 pips/day) is not indicative of future results. Use a demo account first and never risk more than you can afford to lose.
       </div>
-      <button class="hero-cta">Get Instant Access for $49.97 →</button>
     </div>
-    <!-- Optionally, you can add a chart image here for desktop -->
-    <!-- <img class="hero-chart" src="mt4-chart-mockup.png" alt="MetaTrader Chart" /> -->
   </section>
 
-  <!-- STORY / TRUST SECTION -->
+  <!-- TESTIMONIALS SECTION -->
+  <section class="testimonials">
+    <div class="container">
+      <h2 class="section-title">What Real Traders Are Saying</h2>
+      <div class="testimonial-grid">
+        <div class="testimonial-card fade-in">
+          <div class="testimonial-text">
+            "I used to lose sleep over red trades. Now my bot quietly banks pips while I live my life."
+          </div>
+          <div class="testimonial-author">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Jay">
+            <div class="testimonial-info">
+              <div class="testimonial-name">Jay</div>
+              <div class="testimonial-location">Paarl, ZA</div>
+              <span class="verified-badge">✓ Verified Results</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card fade-in">
+          <div class="testimonial-text">
+            "I was skeptical, but the verified backtests speak for themselves."
+          </div>
+          <div class="testimonial-author">
+            <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Trader">
+            <div class="testimonial-info">
+              <div class="testimonial-name">Profitable Trader</div>
+              <div class="testimonial-location">Verified User</div>
+              <span class="verified-badge">✓ Verified Results</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY SECTION -->
   <section class="story-section">
-    <div class="story-left">
-      <img class="trader-face" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Stressed Trader" />
-      <div style="color:#FF3B3B;font-weight:700;">Losing Trades</div>
-    </div>
-    <div class="story-center">
-      <div class="testimonial"><span class="icon">✔️</span> “I used to lose sleep over red trades. Now my bot quietly banks pips while I live my life.”</div>
-      <div class="testimonial"><span class="icon">💬</span> “I was skeptical, but the verified results speak for themselves.”</div>
-      <span class="verified-badge">Myfxbook Verified</span>
-    </div>
-    <div class="story-right">
-      <img class="trader-face" src="https://randomuser.me/api/portraits/men/85.jpg" alt="Happy Trader" />
-      <div style="color:var(--neon-green);font-weight:700;">Profitable Trades</div>
+    <div class="container">
+      <h2 class="section-title">My Story: From Burnout to Breakthrough</h2>
+      <div class="story-content fade-in">
+        <p>
+          Hey there, fellow trader—I'm <strong>Jay</strong>, from the sunny vineyards of Paarl, Western Cape, South Africa. If you're like me a few years back, you're probably glued to your screens, chasing pips in the forex market, only to watch emotions wreck your trades. I remember staring at MT5 charts late into the night, second-guessing every entry, and waking up to blown stops. It was exhausting—missing family time, stressing over ZAR/USD swings, and seeing my account dwindle from impulsive decisions.
+        </p>
+        <p>
+          Sound familiar? That's the trap most retail traders fall into. Wall Street pros have teams, algorithms, and insider edges, while we're left fighting fatigue and FOMO. I tried manual strategies, signals services, even other bots—but they were buggy, over-aggressive, or just plain scams. One bad trade wiped out weeks of gains. I hit rock bottom when a volatile news event (hello, US Fed announcements!) turned a winning streak into a 30% drawdown.
+        </p>
+        <div class="story-highlight">
+          <p>
+            <strong>That's when I decided: Enough.</strong> I dove deep into coding and backtesting, drawing from proven indicators like MA, MACD, ATR, and Bollinger Bands. After countless iterations—and fixing critical bugs like invalid SL/TP validation and position count errors—I created <strong>Galactus EA Bot v5.2</strong>. This isn't some hyped-up gimmick; it's a production-ready powerhouse with conservative defaults (e.g., 1% max risk per trade, 20% drawdown limit) that automates smart entries on autopilot.
+          </p>
+        </div>
+        <p>
+          The transformation? Game-changing. In backtests on EUR/USD (M5 timeframe), it snagged 20-80 pips daily with a 60% win rate, thanks to features like news blackouts and volatility-adjusted sizing. Real users report sleeping better, reclaiming time, and seeing consistent growth—even in choppy ZA markets. But here's the key: It's not magic. It's disciplined automation with built-in safeguards. Today, I'm not just surviving the markets—I'm thriving, all while enjoying Paarl's wines without chart anxiety. If I can do it, so can you.
+        </p>
+        <p style="font-size: 0.95rem; color: var(--text-secondary); font-style: italic; margin-top: 30px;">
+          <strong>Edge Case Note:</strong> In black swan events like 2020's pandemic volatility, Galactus's dynamic SL and session filters helped users minimize losses—proving its resilience.
+        </p>
+      </div>
     </div>
   </section>
 
-  <!-- OFFER / PRICING SECTION -->
-  <section class="offer-section">
-    <span class="price-strike">$497</span>
-    <div class="price-main">$49.97</div>
-    <span class="offer-badge">One-Time Payment – Lifetime Access</span>
-    <ul class="offer-features">
-      <li><span class="check">✔️</span> Works on MetaTrader 4 & 5</li>
-      <li><span class="check">✔️</span> Lifetime Updates & Support</li>
-      <li><span class="check">✔️</span> No Monthly Fees, Ever</li>
-      <li><span class="check">✔️</span> Step-by-Step Setup Guide</li>
-      <li><span class="check">✔️</span> 30-Day Money-Back Guarantee</li>
-    </ul>
-    <span class="scarcity">Only 150 Copies at This Price</span>
-    <div class="payment-badges">
-      <img src="https://cdn-icons-png.flaticon.com/512/196/196566.png" alt="Stripe" />
-      <img src="https://cdn-icons-png.flaticon.com/512/196/196565.png" alt="PayPal" />
+  <!-- FEATURES SECTION -->
+  <section class="features-section">
+    <div class="container">
+      <h2 class="section-title">What Makes Galactus EA Bot v5.2 Special</h2>
+      <div class="features-grid">
+        <div class="feature-card fade-in">
+          <span class="feature-icon">🤖</span>
+          <h3 class="feature-title">Proven Automation</h3>
+          <p class="feature-description">
+            Steals 20-80 pips/day on autopilot using MA20/50 crossovers, MACD signals, and BB filters for high-confidence entries (>0.5 score).
+          </p>
+        </div>
+        <div class="feature-card fade-in">
+          <span class="feature-icon">🛡️</span>
+          <h3 class="feature-title">Ironclad Risk Management</h3>
+          <p class="feature-description">
+            Conservative defaults like 1.2 Martingale multiplier, 150pt SL, 20% drawdown limit, and max 2 positions—protecting your capital.
+          </p>
+        </div>
+        <div class="feature-card fade-in">
+          <span class="feature-icon">🧠</span>
+          <h3 class="feature-title">Smart Features</h3>
+          <p class="feature-description">
+            News blackout (avoids high-impact events), session filtering (e.g., London-only), volatility SL (1.2x ATR), and backtest metrics (Sharpe ratio, win rate tracking).
+          </p>
+        </div>
+        <div class="feature-card fade-in">
+          <span class="feature-icon">⚙️</span>
+          <h3 class="feature-title">Hedging/Netting Support</h3>
+          <p class="feature-description">
+            Works on any account type, with recovery modes (disabled by default for safety).
+          </p>
+        </div>
+        <div class="feature-card fade-in">
+          <span class="feature-icon">🚀</span>
+          <h3 class="feature-title">Easy Setup</h3>
+          <p class="feature-description">
+            Plug-and-play on MT5; customize with inputs like MaxSpread=30 or EquityLimit=20%.
+          </p>
+        </div>
+        <div class="feature-card fade-in">
+          <span class="feature-icon">📊</span>
+          <h3 class="feature-title">Backtest Verified</h3>
+          <p class="feature-description">
+            60% win rate with low drawdowns across 6+ months of historical data on major pairs.
+          </p>
+        </div>
+      </div>
     </div>
-    <button class="offer-cta">Yes, Give Me Autopilot Profits Now!</button>
   </section>
 
-  <!-- BONUS / GUARANTEE STRIP -->
-  <section class="bonus-strip">
-    <div class="bonus-item"><span class="icon">📘</span> Setup Guide</div>
-    <div class="bonus-item"><span class="icon">📝</span> Cheat Sheet</div>
-    <div class="bonus-item"><span class="icon">📊</span> Risk Calculator</div>
-    <div class="bonus-item"><span class="icon">🛡️</span> 30-Day Guarantee</div>
+  <!-- OFFER SECTION -->
+  <section class="offer-section" id="offer">
+    <div class="container">
+      <h2 class="section-title">Now, It's Your Turn to Break Free</h2>
+      <div class="offer-container fade-in">
+        <h3 style="font-size: 1.8rem; color: var(--electric-blue); margin-bottom: 30px; font-weight: 700;">
+          Introducing Galactus EA Bot v5.2—the ultimate "set-it-and-forget-it" tool for MetaTrader 5
+        </h3>
+        
+        <div class="value-stack">
+          <h4 style="color: var(--neon-green); font-size: 1.4rem; margin-bottom: 20px; font-weight: 700;">
+            The Core Offer: Lifetime Access to Galactus EA ($197 Value)
+          </h4>
+          
+          <div class="value-item">
+            <div>
+              <strong>Proven Automation:</strong> Steals 20-80 pips/day on autopilot using MA20/50 crossovers, MACD signals, and BB filters for high-confidence entries (>0.5 score).
+            </div>
+          </div>
+          
+          <div class="value-item">
+            <div>
+              <strong>Ironclad Risk Management:</strong> Conservative defaults like 1.2 Martingale multiplier, 150pt SL, 20% drawdown limit, and max 2 positions—protecting your capital.
+            </div>
+          </div>
+          
+          <div class="value-item">
+            <div>
+              <strong>Smart Features:</strong> News blackout (avoids high-impact events), session filtering (e.g., London-only), volatility SL (1.2x ATR), and backtest metrics (Sharpe ratio, win rate tracking).
+            </div>
+          </div>
+          
+          <div class="value-item">
+            <div>
+              <strong>Hedging/Netting Support:</strong> Works on any account type, with recovery modes (disabled by default for safety).
+            </div>
+          </div>
+          
+          <div class="value-item">
+            <div>
+              <strong>Easy Setup:</strong> Plug-and-play on MT5; customize with inputs like MaxSpread=30 or EquityLimit=20%.
+            </div>
+          </div>
+        </div>
+
+        <h4 style="color: var(--electric-blue); font-size: 1.4rem; margin: 40px 0 20px 0; font-weight: 700;">
+          🎁 Exclusive Bonuses (Worth $211+)
+        </h4>
+        
+        <div class="bonus-grid">
+          <div class="bonus-card">
+            <h4>Quick-Start Video Guide</h4>
+            <p>Step-by-step tutorials on installation, optimization, and demo testing—get trading in under 10 minutes.</p>
+            <div class="bonus-value">Value: $47</div>
+          </div>
+          
+          <div class="bonus-card">
+            <h4>Exclusive Backtest Reports</h4>
+            <p>Detailed PDFs with metrics from 6+ months on major pairs—see the 60% win rate and low drawdowns for yourself.</p>
+            <div class="bonus-value">Value: $67</div>
+          </div>
+          
+          <div class="bonus-card">
+            <h4>Private Telegram Community</h4>
+            <p>Join fellow traders (including ZA locals) for tips, updates, and live Q&A—lifetime free access.</p>
+            <div class="bonus-value">Value: $97/year</div>
+          </div>
+          
+          <div class="bonus-card">
+            <h4>Free Updates & Support</h4>
+            <p>Get all future versions (e.g., v6 with ML filtering) and email support for life.</p>
+            <div class="bonus-value">Value: Priceless</div>
+          </div>
+        </div>
+
+        <div class="total-value">
+          Total Value: $505+
+        </div>
+        
+        <div class="price-comparison">
+          <span class="old-price">$197</span>
+          <div class="current-price">$49.97</div>
+          <span class="savings-badge">Save 75%</span>
+        </div>
+        
+        <p style="color: var(--text-secondary); margin: 20px 0; font-size: 1rem;">
+          (or ~R900 in ZAR—check current rates)
+        </p>
+        
+        <div class="scarcity-alert">
+          ⚠️ Why So Affordable? I want to help everyday traders like us level the playing field against Wall Street. But this price won't last—spots are limited to 100 to ensure quality support.
+        </div>
+        
+        <a href="#final-cta" class="cta-button" style="margin-top: 30px; display: block; max-width: 500px; margin-left: auto; margin-right: auto;">
+          Secure Your Galactus Bot Now - Only $49.97 →
+        </a>
+      </div>
+    </div>
   </section>
 
+  <!-- GUARANTEE SECTION -->
+  <section class="guarantee-section">
+    <div class="container">
+      <div class="guarantee-box fade-in">
+        <div class="guarantee-icon">🛡️</div>
+        <h3 class="guarantee-title">Ironclad Guarantee</h3>
+        <p class="guarantee-text">
+          <strong>30-Day Money-Back Promise.</strong> Test on a demo account; if it's not transforming your trading, get a full refund—no questions.
+        </p>
+        <p class="guarantee-text">
+          Plus, our <strong>"Pips or It's Free"</strong> pledge: If backtests don't show potential, we'll refund double.
+        </p>
+        <div class="guarantee-highlight">
+          Your success is our success. We stand behind Galactus EA Bot v5.2 100%.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA SECTION -->
+  <section class="final-cta-section" id="final-cta">
+    <div class="container">
+      <div class="final-cta-content fade-in">
+        <h2 class="final-cta-headline">
+          Ready to Transform Your Trading?
+        </h2>
+        <p style="font-size: 1.3rem; color: var(--text-secondary); margin-bottom: 40px;">
+          Join hundreds of traders who've already broken free from chart-watching stress. Get Galactus EA Bot v5.2 today and start banking pips on autopilot.
+        </p>
+        <a href="#offer" class="cta-button" style="font-size: 1.5rem; padding: 25px 60px;">
+          Claim Your Bot Now - $49.97 →
+        </a>
+        <p style="margin-top: 30px; color: var(--text-secondary); font-size: 0.9rem;">
+          ⚡ Limited to 100 copies at this price • One-time payment • Lifetime access
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DISCLAIMER SECTION -->
+  <section class="disclaimer-section">
+    <div class="container">
+      <div class="disclaimer-content">
+        <p><strong>Full Disclaimer:</strong> No guarantees of profits. Results vary based on market conditions, settings, and risk tolerance. Trading can lead to total capital loss. Consult a financial advisor. Not available where prohibited.</p>
+        <p style="margin-top: 15px;">
+          <strong>Risk Warning:</strong> Trading forex involves significant risk of loss and is not suitable for all investors. Past performance (including backtests showing 20-80 pips/day) is not indicative of future results. Use a demo account first and never risk more than you can afford to lose. The value of investments can go down as well as up. Always trade responsibly.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
