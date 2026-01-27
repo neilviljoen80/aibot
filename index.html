@@ -534,6 +534,35 @@
     .disclaimer-content strong {
       color: var(--danger);
     }
+
+    /* FOOTER */
+    .footer {
+      padding: 24px 20px 32px;
+      background: linear-gradient(135deg, #0b111a, #05070b);
+      border-top: 1px solid rgba(0, 255, 159, 0.12);
+      text-align: center;
+    }
+    .footer-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .footer a {
+      color: var(--neon-green);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+    .footer small {
+      display: block;
+      margin-top: 6px;
+      color: var(--gray);
+      letter-spacing: 0.3px;
+    }
     
     /* RESPONSIVE */
     @media (max-width: 768px) {
@@ -851,6 +880,14 @@
       </div>
     </div>
   </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      If you have any enquiries, contact us at
+      <a href="mailto:support@jditrading.online">support@jditrading.online</a>
+      <small>© 2026 JDI TRADING SOLUTION. All rights reserved.</small>
+    </div>
+  </footer>
 
   <script>
     // Scroll animations
