@@ -632,7 +632,7 @@
       <p class="hero-description">
         Get Instant Access for Just <span class="price-highlight">$149</span> (Limited-Time Intro Price—Act Now Before It Jumps to $197!)
       </p>
-      <button type="button" class="cta-button whop-cta" data-whop-product-url="https://whop.com/jdi-trading-solutions/galactus-ea-bot-v5-2/">Claim Your Bot Now →</button>
+      <button type="button" class="cta-button whop-cta" data-whop-product-id="prod_KRt7H50CRDGQi" data-whop-product-url="https://whop.com/jdi-trading-solutions/galactus-ea-bot-v5-2/">Claim Your Bot Now →</button>
       <div class="risk-disclaimer">
         <strong>Risk Disclaimer:</strong> Trading forex involves significant risk of loss and is not suitable for all investors. Past performance (including backtests showing 20-80 pips/day) is not indicative of future results. Use a demo account first and never risk more than you can afford to lose.
       </div>
@@ -844,7 +844,7 @@
           ⚠️ Why So Affordable? I want to help everyday traders like us level the playing field against Wall Street. But this price won't last—spots are limited to 100 to ensure quality support.
         </div>
         
-        <button type="button" class="cta-button whop-cta" data-whop-product-url="https://whop.com/jdi-trading-solutions/galactus-ea-bot-v5-2/" style="margin-top: 30px; display: block; max-width: 500px; margin-left: auto; margin-right: auto;">
+        <button type="button" class="cta-button whop-cta" data-whop-product-id="prod_KRt7H50CRDGQi" data-whop-product-url="https://whop.com/jdi-trading-solutions/galactus-ea-bot-v5-2/" style="margin-top: 30px; display: block; max-width: 500px; margin-left: auto; margin-right: auto;">
           Secure Your Galactus Bot Now - Only $149 →
         </button>
       </div>
@@ -880,7 +880,7 @@
         <p style="font-size: 1.3rem; color: var(--text-secondary); margin-bottom: 40px;">
           Join hundreds of traders who've already broken free from chart-watching stress. Get Galactus EA Bot v5.2 today and start banking pips on autopilot.
         </p>
-        <button type="button" class="cta-button whop-cta" data-whop-product-url="https://whop.com/jdi-trading-solutions/galactus-ea-bot-v5-2/" style="font-size: 1.5rem; padding: 25px 60px;">
+        <button type="button" class="cta-button whop-cta" data-whop-product-id="prod_KRt7H50CRDGQi" data-whop-product-url="https://whop.com/jdi-trading-solutions/galactus-ea-bot-v5-2/" style="font-size: 1.5rem; padding: 25px 60px;">
           Claim Your Bot Now - $149 →
         </button>
         <p style="margin-top: 30px; color: var(--text-secondary); font-size: 0.9rem;">
@@ -904,21 +904,24 @@
 
   <script>
     // Whop Checkout Overlay wiring (static HTML)
-    // If you prefer a product ID, replace data-whop-product-url with: data-whop-product-id="YOUR_ID"
     const WHOP_DEFAULT_PRODUCT_URL = 'https://whop.com/jdi-trading-solutions/galactus-ea-bot-v5-2/';
+    const WHOP_DEFAULT_PRODUCT_ID = 'prod_KRt7H50CRDGQi';
 
     function openWhopOverlay({ productId, productUrl }) {
+      const id = productId || WHOP_DEFAULT_PRODUCT_ID;
       const url = productUrl || WHOP_DEFAULT_PRODUCT_URL;
 
       // Attempt multiple likely Whop SDK shapes to be resilient to minor API differences.
       try {
         if (window.Whop) {
           if (typeof window.Whop.open === 'function') {
-            try { window.Whop.open(productId || url); return true; } catch (_) {}
+            try { window.Whop.open(id); return true; } catch (_) {}
+            try { window.Whop.open(url); return true; } catch (_) {}
             try { window.Whop.open({ productId, url, product: url }); return true; } catch (_) {}
           }
           if (typeof window.Whop.checkout === 'function') {
-            try { window.Whop.checkout(productId || url); return true; } catch (_) {}
+            try { window.Whop.checkout(id); return true; } catch (_) {}
+            try { window.Whop.checkout(url); return true; } catch (_) {}
             try { window.Whop.checkout({ productId, url, product: url }); return true; } catch (_) {}
           }
         }
